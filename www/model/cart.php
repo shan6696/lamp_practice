@@ -13,7 +13,7 @@ function get_user_carts($db, $user_id){
       items.image,
       carts.cart_id,
       carts.user_id,
-      carts.amount
+    carts.amount
     FROM
       carts
     JOIN
@@ -21,39 +21,39 @@ function get_user_carts($db, $user_id){
     ON
       carts.item_id = items.item_id
     WHERE
-      carts.user_id = {$user_id}
+      carts.user_id = ?
   ";
-  return fetch_all_query($db, $sql);
+  return fetch_all_query($db, $sql, array($user_id));
 }
-
 function get_user_cart($db, $user_id, $item_id){
-  $sql = "
-    SELECT
-      items.item_id,
-      items.name,
-      items.price,
-      items.stock,
-      items.status,
-      items.image,
-      carts.cart_id,
-      carts.user_id,
-      carts.amount
-    FROM
-      carts
-    JOIN
-      items
-    ON
-      carts.item_id = items.item_id
-    WHERE
-      carts.user_id = {$user_id}
-    AND
-      items.item_id = {$item_id}
-  ";
+  if(is_valid_csrf_token($_POST['token']) === true) {
+    $sql = "
+      SELECT
+        items.item_id,
+        items.name,
+        items.price,
+        items.stock,
+        items.status,
+        items.image,
+        carts.cart_id,
+        carts.user_id,
+        carts.amount
+      FROM
+        carts
+      JOIN
+        items
+      ON
+        carts.item_id = items.item_id
+      WHERE
+        carts.user_id = ?
+      AND
+        items.item_id = ?
+    ";
 
-  return fetch_query($db, $sql);
+    return fetch_query($db, $sql, array($user_id, $item_id));
 
+  }
 }
-
 function add_cart($db, $user_id, $item_id ) {
   $cart = get_user_cart($db, $user_id, $item_id);
   if($cart === false){
