@@ -30,4 +30,9 @@ function regist_order($db, $user_id, $purchase, $carts) {
   }
 }
 
+function get_user_order($db, $user_id) {
+  $sql = 'SELECT order_id, purchase, createdate FROM orders WHERE user_id = ?';
+  return fetch_all_query($db, $sql, array($user_id));
+}
+
 ?>
