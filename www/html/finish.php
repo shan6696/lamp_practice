@@ -4,10 +4,10 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'cart.php';
+require_once MODEL_PATH . 'order.php';
 
 header('X-FRAME-OPTIONS: DENY');
 session_start();
-
 if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
@@ -29,6 +29,11 @@ if(is_valid_csrf_token($_POST['token'])) {
 get_csrf_token();
 
 $total_price = sum_carts($carts);
+
+$user_id = $user['user_id'];
+$purchase = $total_price;
+
+regist_order($db, $user_id, $purchase, $carts);
 
 
 include_once '../view/finish_view.php';
