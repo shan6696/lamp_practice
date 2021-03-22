@@ -12,3 +12,13 @@ CREATE TABLE order_details (
   price INT,
   amount INT DEFAULT 0
 );
+
+SELECT
+  order_details.order_id,
+  items.name,
+  order_details.price,
+  order_details.amount
+FROM
+  order_details
+  INNER JOIN items
+  ON order_details.item_id = items.item_id;

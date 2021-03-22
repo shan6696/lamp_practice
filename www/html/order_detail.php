@@ -16,10 +16,12 @@ $db = get_db_connect();
 
 $user = get_login_user($db);
 
-if($user['name'] === 'admin' && $user['password'] === 'admin') {
-  $orders = get_admin_order($db);
-} else {
-  $orders = get_user_order($db, $user['user_id']);
-}
+$order_id = $_POST['order_id'];
 
-include_once '../view/history_view.php';
+$order = get_order($db, $order_id);
+
+$order_details = get_order_details($db, $order_id);
+
+
+
+include_once '../view/order_detail_view.php';
