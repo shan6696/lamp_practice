@@ -22,4 +22,6 @@ if($user['name'] === 'admin' && $user['password'] === 'admin') {
   $orders = get_user_order($db, $user['user_id']);
 }
 
+$token = get_csrf_token();
+
 include_once '../view/history_view.php';

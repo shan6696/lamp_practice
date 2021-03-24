@@ -22,3 +22,25 @@ FROM
   order_details
   INNER JOIN items
   ON order_details.item_id = items.item_id;
+
+-- 人気ランキングsql
+SELECT
+items.item_id,
+items.name,
+items.stock,
+items.price,
+items.image,
+items.status,
+sum(amount)
+FROM
+order_details
+INNER JOIN
+items
+ON order_details.item_id = items.item_id
+WHERE 
+status = 1
+GROUP BY
+order_details.item_id
+ORDER BY
+sum(amount) DESC
+LIMIT 3

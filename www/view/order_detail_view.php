@@ -25,7 +25,7 @@
           <tr>
             <td><?php print $order['order_id']; ?></td>
             <td><?php print $order['createdate']; ?></td>
-            <td><?php print $order['purchase']; ?>円</td>
+            <td><?php print $order['sum(order_details.price * order_details.amount)']; ?>円</td>
 
         </tbody>
       </table>

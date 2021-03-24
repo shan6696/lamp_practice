@@ -27,10 +27,11 @@
           <tr>
             <td><?php print $order['order_id']; ?></td>
             <td><?php print $order['createdate']; ?></td>
-            <td><?php print $order['purchase']; ?>円</td>
+            <td><?php print $order['sum(order_details.price * order_details.amount)']; ?>円</td>
             <td>
               <form method="post" action="order_detail.php">
                 <input type="hidden" name="order_id" value="<?php print $order['order_id']; ?>">
+                <input type="hidden" name="token" value="<?php print $token; ?>">
                 <input type="submit" value="購入明細表示">
               </form>
             </td>

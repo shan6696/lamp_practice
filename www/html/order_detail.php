@@ -16,8 +16,10 @@ $db = get_db_connect();
 
 $user = get_login_user($db);
 
-$order_id = $_POST['order_id'];
-
+if(is_valid_csrf_token($_POST['token'])) {
+  $order_id = $_POST['order_id'];
+}
+get_csrf_token();
 $order = get_order($db, $order_id);
 
 $order_details = get_order_details($db, $order_id);

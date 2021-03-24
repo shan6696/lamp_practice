@@ -31,9 +31,8 @@ get_csrf_token();
 $total_price = sum_carts($carts);
 
 $user_id = $user['user_id'];
-$purchase = $total_price;
 
-regist_order($db, $user_id, $purchase, $carts);
+regist_order($db, $user_id, $carts);
 
 
 include_once '../view/finish_view.php';
