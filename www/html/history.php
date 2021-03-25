@@ -4,23 +4,24 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'cart.php';
+require_once MODEL_PATH . 'order.php';
 
 header('X-FRAME-OPTIONS: DENY');
 session_start();
-
 if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
 $db = get_db_connect();
+
 $user = get_login_user($db);
 
-$carts = get_user_carts($db, $user['user_id']);
-
-$total_price = sum_carts($carts);
+if($user['name'] === 'admin' && $user['password'] === 'admin') {
+  $orders = get_admin_order($db);
+} else {
+  $orders = get_user_order($db, $user['user_id']);
+}
 
 $token = get_csrf_token();
-
-
-
-include_once VIEW_PATH . 'cart_view.php';
+var_dump($token);
+include_once '../view/history_view.php';

@@ -206,3 +206,88 @@ function is_valid_item_status($status){
   }
   return $is_valid;
 }
+
+function get_ranking_item($db, $sql) {
+  $sql = '  SELECT
+            items.item_id,
+            items.name,
+            items.stock,
+            items.price,
+            items.image,
+            items.status,
+            sum(amount)
+            FROM
+            order_details
+            INNER JOIN
+            items
+            ON order_details.item_id = items.item_id
+            WHERE 
+            status = 1
+            GROUP BY
+            order_details.item_id
+            ORDER BY
+            sum(amount) DESC
+            LIMIT 3';
+
+    return fetch_all_query($db, $sql);
+}
+
+function get_items_created_desc($db){
+  $sql = '
+    SELECT
+      item_id, 
+      name,
+      stock,
+      price,
+      image,
+      status,
+      created
+    FROM
+      items
+    WHERE
+      status = 1
+    ORDER BY 
+      created DESC
+    ';
+  return fetch_all_query($db, $sql);
+}
+
+function get_items_price_asc($db){
+  $sql = '
+    SELECT
+      item_id, 
+      name,
+      stock,
+      price,
+      image,
+      status,
+      created
+    FROM
+      items
+    WHERE
+      status = 1
+    ORDER BY 
+      price ASC
+    ';
+  return fetch_all_query($db, $sql);
+}
+
+function get_items_price_desc($db){
+  $sql = '
+    SELECT
+      item_id, 
+      name,
+      stock,
+      price,
+      image,
+      status,
+      created
+    FROM
+      items
+    WHERE
+      status = 1
+    ORDER BY 
+      price DESC
+    ';
+  return fetch_all_query($db, $sql);
+}

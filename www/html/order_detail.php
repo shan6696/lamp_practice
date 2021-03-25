@@ -16,23 +16,16 @@ $db = get_db_connect();
 
 $user = get_login_user($db);
 
-$carts = get_user_carts($db, $user['user_id']);
-
-$token = get_csrf_token();
-
-if(is_valid_csrf_token($_POST['token'])) {
-  if(purchase_carts($db, $carts) === false){
-    set_error('商品が購入できませんでした。');
-    redirect_to(CART_URL);
-  } 
+if(is_valid_csrf_token($_GET['token'])) {
+$order_id = $_GET['order_id'];
+}else{
+  redirect_to(HISTORY_URL);
 }
 get_csrf_token();
+$order = get_order($db, $order_id);
 
-$total_price = sum_carts($carts);
-
-$user_id = $user['user_id'];
-
-regist_order($db, $user_id, $carts);
+$order_details = get_order_details($db, $order_id);
 
 
-include_once '../view/finish_view.php';
+
+include_once '../view/order_detail_view.php';

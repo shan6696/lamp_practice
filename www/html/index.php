@@ -14,7 +14,19 @@ if(is_logined() === false){
 $db = get_db_connect();
 $user = get_login_user($db);
 
-$items = get_open_items($db);
+
+if($_GET['value'] === 'new') {
+  $items = get_items_created_desc($db);
+} else if($_GET['value'] === 'row') {
+  $items = get_items_price_asc($db);
+} else if($_GET['value'] === 'high') {
+  $items = get_items_price_desc($db);
+} else {
+  $items = get_open_items($db);
+}
+$items_ranking = get_ranking_item($db, $sql);
+
+
 
 $token = get_csrf_token();
 
