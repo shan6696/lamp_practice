@@ -231,3 +231,63 @@ function get_ranking_item($db, $sql) {
 
     return fetch_all_query($db, $sql);
 }
+
+function get_items_created_desc($db){
+  $sql = '
+    SELECT
+      item_id, 
+      name,
+      stock,
+      price,
+      image,
+      status,
+      created
+    FROM
+      items
+    WHERE
+      status = 1
+    ORDER BY 
+      created DESC
+    ';
+  return fetch_all_query($db, $sql);
+}
+
+function get_items_price_asc($db){
+  $sql = '
+    SELECT
+      item_id, 
+      name,
+      stock,
+      price,
+      image,
+      status,
+      created
+    FROM
+      items
+    WHERE
+      status = 1
+    ORDER BY 
+      price ASC
+    ';
+  return fetch_all_query($db, $sql);
+}
+
+function get_items_price_desc($db){
+  $sql = '
+    SELECT
+      item_id, 
+      name,
+      stock,
+      price,
+      image,
+      status,
+      created
+    FROM
+      items
+    WHERE
+      status = 1
+    ORDER BY 
+      price DESC
+    ';
+  return fetch_all_query($db, $sql);
+}

@@ -16,8 +16,10 @@ $db = get_db_connect();
 
 $user = get_login_user($db);
 
-if(is_valid_csrf_token($_POST['token'])) {
-  $order_id = $_POST['order_id'];
+if(is_valid_csrf_token($_GET['token'])) {
+$order_id = $_GET['order_id'];
+}else{
+  redirect_to(HISTORY_URL);
 }
 get_csrf_token();
 $order = get_order($db, $order_id);

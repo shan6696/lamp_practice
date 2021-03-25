@@ -25,7 +25,7 @@
       <div class="row">
         <?php foreach($items as $item){ ?>
         <div class="col-6 item">
-          <div class="card h-100 text-center">
+          <div class="card text-center">
             <div class="card-header">
               <?php print(h($item['name'])); ?>
             </div>
@@ -56,7 +56,7 @@
         $count = $count + 1; ?>
           <div class="ranking_a">
             <p><?php print $count; ?>位</p>
-            <div class="card h-100 text-center">
+            <div class="card text-center">
               <div class="card-header">
                 <?php print(h($item['name'])); ?>
               </div>

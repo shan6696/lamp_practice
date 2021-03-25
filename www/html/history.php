@@ -23,5 +23,5 @@ if($user['name'] === 'admin' && $user['password'] === 'admin') {
 }
 
 $token = get_csrf_token();
-
+var_dump($token);
 include_once '../view/history_view.php';

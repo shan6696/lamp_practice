@@ -1,7 +1,6 @@
 CREATE TABLE orders (
   order_id INT AUTO_INCREMENT,
   user_id INT,
-  purchase INT,
   createdate DATETIME,
   primary key(order_id)
 );

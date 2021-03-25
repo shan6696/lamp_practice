@@ -3,14 +3,13 @@
   // console.log(selectElement.value);
   selectElement.addEventListener('change',function() {
     if(selectElement.value === 'new') {
-      history.replaceState('','index.php','?value=rnew');
-      window.location.reload();
+      // history.replaceState('','index.php','?value=new');
+      // window.location.reload();
+      location.href='index.php?value=new';
     }else if (selectElement.value === 'row') {
-      history.replaceState('','index.php','?value=row');
-      window.location.reload();
+      location.href='index.php?value=row';
     }else if (selectElement.value === 'high') {
-      history.replaceState('','index.php','?value=high');
-      window.location.reload();
+      location.href='index.php?value=high'
     }
   } );
 </script>
